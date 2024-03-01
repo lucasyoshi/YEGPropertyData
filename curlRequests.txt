@@ -1,0 +1,59 @@
+curl -X POST -H "Content-Type: application/json" \
+     -d '{"username":"user2015", "password":"Password2015"}' \
+     'http://localhost:3200/login/enter'
+
+curl 'http://localhost:3200/properties/assessedValue?neighbourhood=RUTHERFORD&minValue=435000&maxValue=436000'
+
+curl 'http://localhost:3200/properties/allRecords'
+
+curl -H "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsInVzZXJuYW1lIjoidXNlcjIwMTUiLCJpYXQiOjE3MDE4ODU3ODYsImV4cCI6MTcwMTg5Mjk4Nn0.RgNSpGAQgqYgYrOmQ_gdfCGOJF5pcKofKvfSUo63Rfs" 'http://localhost:3200/properties/allRecords'
+
+curl 'http://localhost:3200/login/enter'
+
+# Login
+curl -X POST http://localhost:3200/enter -H "Content-Type: application/json" -d '{
+  "username": "<username>",
+  "password": "<password>"
+}'
+
+# Query Property
+curl -X GET "http://localhost:3200/query?houseNumber=10205&streetName=100%20Street%20NW&suite=3202" -H "Content-Type: application/json"
+
+# Get Assessed Value
+curl -X GET "http://localhost:3200/assessedValue?neighbourhood=Oliver&minValue=100000&maxValue=200000" -H "Content-Type: application/json"
+
+# Get All Records
+curl -X GET http://localhost:3200/allRecords -H "Content-Type: application/json" -H "Authorization: Bearer <your_jwt_token>"
+
+# Add Property
+curl -X POST http://localhost:3200/addProperty -H "Content-Type: application/json" -H "Authorization: Bearer <your_jwt_token>" -d '{
+  "suite": "3202",
+  "houseNumber": "10205",
+  "streetName": "120 Street NW",
+  "garage": true,
+  "neighbourhoodId": 1,
+  "neighbourhood": "Oliver",
+  "ward": "Ward 6",
+  "assessedValue": 150000,
+  "latitude": 53.5461,
+  "longitude": -113.4938,
+  "assessmentClass1": "Residential"
+}'
+
+# Delete Property
+curl -X DELETE http://localhost:3200/deleteProperty/1 -H "Content-Type: application/json" -H "Authorization: Bearer <your_jwt_token>"
+
+# Update Property
+curl -X PUT http://localhost:3200/updateProperty/1 -H "Content-Type: application/json" -H "Authorization: Bearer <your_jwt_token>" -d '{
+  "suite": "3202",
+  "houseNumber": "10205",
+  "streetName": "120 Street NW",
+  "garage": true,
+  "neighbourhoodId": 1,
+  "neighbourhood": "Oliver",
+  "ward": "Ward 6",
+  "assessedValue": 150000,
+  "latitude": 53.5461,
+  "longitude": -113.4938,
+  "assessmentClass1": "Residential"
+}'
